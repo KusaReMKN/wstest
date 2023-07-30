@@ -4,15 +4,26 @@ const ws = require('ws');
 
 const port = 8080;
 
-/* HTTP で返すページを読み込む */
-const page = fs.readFileSync('./index.html', 'utf-8');
-
 /* HTTP サーバくん */
 const server = http.createServer((req, res) => {
-	res.writeHead(200, {
-		'Content-Type': 'text/html',
-	});
-	res.end(page, 'utf-8');
+	switch (req.url) {
+		case '/':
+		case '/index.html':
+			res.writeHead(200, {
+				'Content-Type': 'text/html',
+			});
+			res.end(fs.readFileSync('./index.html', 'utf-8'));
+			break;
+		case '/index.js':
+			res.writeHead(200, {
+				'Content-Type': 'text/html',
+			});
+			res.end(fs.readFileSync('./index.js', 'utf-8'));
+			break;
+		default:
+			res.writeHead(404);
+			res.end('404');
+	}
 });
 
 const wss = new ws.WebSocketServer({ server });
