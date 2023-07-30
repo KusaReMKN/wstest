@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>WebSocket Chat</title>
+  </head>
+  <body>
+    <header>
+      <h1>WebSocket Chat</h1>
+    </header>
+    <main>
+      <pre id="output"></pre>
+      <form id="form">
+        <input type="text" id="msg">
+        <input type="submit">
+      </form>
+    </main>
+    <script>
+      'use strict';
+
+      // WebSocket に接続する
+      const ws = new WebSocket('ws://localhost:8080');
+
+      // サーバからメッセージを受信したら output に表示する
+      ws.addEventListener('message', e => {
+              output.textContent += e.data + '\n';
+            });
+
+      // フォームを送信しようとしたら WebSocket でサーバにメッセージを送る
+      form.addEventListener('submit', e => {
+              e.preventDefault(); // form の送信を行わない
+              ws.send(msg.value);
+            });
+    </script>
+  </body>
+</html>

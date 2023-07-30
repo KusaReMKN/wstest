@@ -1,0 +1,27 @@
+{
+  "name": "wstest",
+  "version": "1.0.0",
+  "description": "WebSocket Chat",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "KusaReMKN",
+  "license": "WTFPL",
+  "dependencies": {
+    "http": "^0.0.1-security",
+    "ws": "^8.13.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KusaReMKN/wstest.git"
+  },
+  "keywords": [
+    "WebSocket"
+  ],
+  "bugs": {
+    "url": "https://github.com/KusaReMKN/wstest/issues"
+  },
+  "homepage": "https://github.com/KusaReMKN/wstest#readme"
+}
