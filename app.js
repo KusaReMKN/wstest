@@ -1,34 +1,15 @@
 const fs = require('fs');
-const http = require('http');
-const ws = require('ws');
+
+const express = require('express');
+const app = express();
+
+const expressWs = require('express-ws')(app);
 
 const port = 8080;
 
-/* HTTP サーバくん */
-const server = http.createServer((req, res) => {
-	switch (req.url) {
-		case '/':
-		case '/index.html':
-			res.writeHead(200, {
-				'Content-Type': 'text/html',
-			});
-			res.end(fs.readFileSync('./index.html', 'utf-8'));
-			break;
-		case '/index.js':
-			res.writeHead(200, {
-				'Content-Type': 'text/html',
-			});
-			res.end(fs.readFileSync('./index.js', 'utf-8'));
-			break;
-		default:
-			res.writeHead(404);
-			res.end('404');
-	}
-});
+app.use(express.static('./'));
 
-const wss = new ws.WebSocketServer({ server });
-/* WebSocket サーバくん */
-wss.on('connection', ws => {
+app.ws('/', ws => {
 	/* エラー発生時 */
 	ws.on('error', e => {
 		console.error(e);
@@ -42,10 +23,10 @@ wss.on('connection', ws => {
 		console.log('received:', msg);
 
 		// 全てのクライアントに放送する
-		wss.clients.forEach(client => {
+		expressWs.getWss().clients.forEach(client => {
 			client.send(msg);
 		});
 	});
 });
 
-server.listen(port);
+app.listen(port);

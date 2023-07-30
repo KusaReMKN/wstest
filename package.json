@@ -8,11 +8,6 @@
   },
   "author": "KusaReMKN",
   "license": "WTFPL",
-  "dependencies": {
-    "http": "^0.0.1-security",
-    "ws": "^8.13.0"
-  },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KusaReMKN/wstest.git"
@@ -23,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/KusaReMKN/wstest/issues"
   },
-  "homepage": "https://github.com/KusaReMKN/wstest#readme"
+  "homepage": "https://github.com/KusaReMKN/wstest#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-ws": "^5.0.2"
+  }
 }
